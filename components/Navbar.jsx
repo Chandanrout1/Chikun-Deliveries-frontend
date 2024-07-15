@@ -1,17 +1,20 @@
 "use client"
-import React from "react";
+import React,{ useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import logo from "../public/favicon.png";
 import Login from "./Login.jsx";
-import { useState } from "react";
+import { IoMdClose } from "react-icons/io";
+import Ordercard from "./Ordercard";
 
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
+  const [activeCart,setActiveCart] = useState(false);
   
   return (
+    <>
     <div className="navbar bg-pink-50 px-8 md:px-12 h-20 flex items-center justify-between">
       <div className="flex items-center">
         <div className="h-10 w-10 mr-3">
@@ -64,7 +67,7 @@ const Navbar = () => {
               </li>
             </ul>
           </button>
-          <button className="btn text-white bg-blue-600 hover:bg-blue-800 focus:outline-none font-medium text-sm rounded-lg px-5 py-2.5 text-center">Cart</button>
+          <button onClick={()=> setActiveCart(!activeCart)} className="btn text-white bg-blue-600 hover:bg-blue-800 focus:outline-none font-medium text-sm rounded-lg px-5 py-2.5 text-center">Cart</button>
           <div className="text-center">
         <button
           className="btn text-white bg-blue-600 hover:bg-blue-800 focus:outline-none font-medium text-sm rounded-lg px-5 py-2.5 text-center mr-5"
@@ -163,7 +166,28 @@ const Navbar = () => {
         </div>
       </div>
     </div>
+    <div className={`fixed right-0 top-0 w-full lg:w-[25vw] bg-blue-100 h-full p-4 ${activeCart? "translate-x-0" : "translate-x-full"} transition-all duration-500 z-50`}>
+        <div className="flex justify-between items-center my-3 ">
+          <span className="text-xl font-bold font-sans text-gray-800 ">
+            Order Summary
+          </span>
+          <IoMdClose onClick={()=> setActiveCart(!activeCart)} className="border-2 border-blue-600 text-gray-600 font-bold p-1 text-2xl rounded-md hover:text-orange-500 hover:border-orange-500 cursor-pointer" />
+        </div>
+        <Ordercard/>
+        <div className="shadow-xl">
+        <button className="bg-red-600 text-white p-3 rounded-md shadow-md absolute bottom-3 right-0 mr-5 hover:bg-red-700">
+          Proceed to Checkout
+        </button>
+        <span className="flex flex-grid absolute bottom-6 left-0 ml-8 text-blue-950">
+            <p className="font-bold">Total:</p>
+            <p className="ml-2 ">₹388</p>
+        </span>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default Navbar;
+
+
