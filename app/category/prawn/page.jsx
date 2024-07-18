@@ -1,13 +1,15 @@
 import Footer from "@/components/Footer";
-import MainPage from "@/components/MainPage";
 import Navbar from "@/components/Navbar";
+import PrawnItem from "@/components/PrawnItem";
 
-export default function Home() {
+const Store = () => {
   return (
     <>
       <Navbar/>
-      <MainPage/>
+      <PrawnItem/>
       <Footer/>
     </>
   );
-}
+};
+
+export default Store;

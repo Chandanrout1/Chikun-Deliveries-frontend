@@ -1,13 +1,15 @@
 import Footer from "@/components/Footer";
-import MainPage from "@/components/MainPage";
 import Navbar from "@/components/Navbar";
+import PaneerItem from "@/components/PaneerItem";
 
-export default function Home() {
+const Store = () => {
   return (
     <>
       <Navbar/>
-      <MainPage/>
+      <PaneerItem/>
       <Footer/>
     </>
   );
-}
+};
+
+export default Store;

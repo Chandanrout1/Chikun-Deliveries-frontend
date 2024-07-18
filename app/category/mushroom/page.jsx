@@ -1,13 +1,15 @@
 import Footer from "@/components/Footer";
-import MainPage from "@/components/MainPage";
+import MushroomItem from "@/components/MushroomItem";
 import Navbar from "@/components/Navbar";
 
-export default function Home() {
+const Store = () => {
   return (
     <>
       <Navbar/>
-      <MainPage/>
+      <MushroomItem/>
       <Footer/>
     </>
   );
-}
+};
+
+export default Store;

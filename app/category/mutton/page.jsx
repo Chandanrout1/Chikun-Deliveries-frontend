@@ -1,13 +1,15 @@
 import Footer from "@/components/Footer";
-import MainPage from "@/components/MainPage";
+import MuttonItem from "@/components/MuttonItem";
 import Navbar from "@/components/Navbar";
 
-export default function Home() {
+const Store = () => {
   return (
     <>
       <Navbar/>
-      <MainPage/>
+      <MuttonItem/>
       <Footer/>
     </>
   );
-}
+};
+
+export default Store;

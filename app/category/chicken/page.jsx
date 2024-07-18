@@ -1,13 +1,15 @@
+import ChickenItem from "@/components/ChickenItem";
 import Footer from "@/components/Footer";
-import MainPage from "@/components/MainPage";
 import Navbar from "@/components/Navbar";
 
-export default function Home() {
+const Store = () => {
   return (
     <>
       <Navbar/>
-      <MainPage/>
+      <ChickenItem/>
       <Footer/>
     </>
   );
-}
+};
+
+export default Store;
