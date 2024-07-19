@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import logo from "../public/favicon.png";
 import Login from "./Login.jsx";
 import { IoMdClose } from "react-icons/io";
@@ -11,24 +10,27 @@ import Ordercard from "./Ordercard";
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
       <div className="navbar bg-pink-50 px-8 md:px-12 h-20 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/">
-          <div className="h-10 w-10 mr-3">
-            <Image src={logo} alt="Chikun delveries" />
-          </div>
+            <div className="h-10 w-10 mr-3">
+              <Image src={logo} alt="Chikun deliveries" />
+            </div>
           </Link>
           <Link href="/">
-          <div>
-          <a className="text-xl font-semibold">
-            Chikun
-            <br />
-            Deliveries
-          </a>
-          </div>
+            <div className="text-xl font-semibold">
+              Chikun
+              <br />
+              Deliveries
+            </div>
           </Link>
           <div className="text-xl ml-20">Location</div>
         </div>
@@ -46,7 +48,7 @@ const Navbar = () => {
                 Shops
               </button>
             </Link>
-            <button className="dropdown dropdown-bottom ">
+            <div className="dropdown dropdown-bottom">
               <div
                 tabIndex={0}
                 role="button"
@@ -54,42 +56,44 @@ const Navbar = () => {
               >
                 Categories
               </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 mt-2 shadow"
-              > 
-              <Link href="/category/chicken">
-                <li>
-                  <a>Chicken</a>
-                </li>
-              </Link>
-              <Link href="/category/mutton">
-                <li>
-                  <a>Mutton</a>
-                </li>
-              </Link>
-              <Link href="/category/fish">
-                <li>
-                  <a>Fish</a>
-                </li>
-              </Link> 
-              <Link href="/category/prawn">
-                <li>
-                  <a>Prawns</a>
-                </li>
-              </Link>
-              <Link href="/category/mushroom">
-                <li>
-                  <a>Mushrooms</a>
-                </li>
-              </Link>
-              <Link href="/category/paneer">
-                <li>
-                  <a>Paneer</a>
-                </li>
-              </Link> 
-              </ul>
-            </button>
+              {isClient && (
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 mt-2 shadow"
+                >
+                  <Link href="/category/chicken">
+                    <li>
+                      <a>Chicken</a>
+                    </li>
+                  </Link>
+                  <Link href="/category/mutton">
+                    <li>
+                      <a>Mutton</a>
+                    </li>
+                  </Link>
+                  <Link href="/category/fish">
+                    <li>
+                      <a>Fish</a>
+                    </li>
+                  </Link>
+                  <Link href="/category/prawn">
+                    <li>
+                      <a>Prawns</a>
+                    </li>
+                  </Link>
+                  <Link href="/category/mushroom">
+                    <li>
+                      <a>Mushrooms</a>
+                    </li>
+                  </Link>
+                  <Link href="/category/paneer">
+                    <li>
+                      <a>Paneer</a>
+                    </li>
+                  </Link>
+                </ul>
+              )}
+            </div>
             <button
               onClick={() => setActiveCart(!activeCart)}
               className="btn text-white bg-blue-600 hover:bg-blue-800 focus:outline-none font-medium text-sm rounded-lg px-5 py-2.5 text-center"
@@ -103,66 +107,68 @@ const Navbar = () => {
               >
                 Login
               </button>
-              <Login isVisible={showModal} onClose={() => setShowModal(false)}>
-                <div className="py-6 px-6 lg:px-8 text-left">
-                  <h3 className="mb-4 text-xl font-medium text-gray-900 text-center">
-                    Login
-                  </h3>
-                  <form className="space-y-6" action="#">
-                    <div>
-                      <label
-                        for="email"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Mobile Number
-                      </label>
-                      <input
-                        type="text"
-                        name="number"
-                        id="number"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-400  block w-full p-2.5"
-                        placeholder="123xxxx789"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        for="password"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="******"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-400  block w-full p-2.5"
-                        required
-                      />
-                    </div>
-                    <div className="text-right text-sm text-red-500">
-                      <a href="">Forget Password?</a>
-                    </div>
-                    <div className="flex justify-center">
-                      <button
-                        type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-                      >
-                        Login to your account
-                      </button>
-                    </div>
-                    <div className="text-left text-sm">
-                      <h2 className="text-gray-800">
-                        Not registered?{" "}
-                        <a className="text-blue-700" href="">
-                          Create account
-                        </a>
-                      </h2>
-                    </div>
-                  </form>
-                </div>
-              </Login>
+              {isClient && (
+                <Login isVisible={showModal} onClose={() => setShowModal(false)}>
+                  <div className="py-6 px-6 lg:px-8 text-left">
+                    <h3 className="mb-4 text-xl font-medium text-gray-900 text-center">
+                      Login
+                    </h3>
+                    <form className="space-y-6" action="#">
+                      <div>
+                        <label
+                          htmlFor="number"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Mobile Number
+                        </label>
+                        <input
+                          type="text"
+                          name="number"
+                          id="number"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-400 block w-full p-2.5"
+                          placeholder="123xxxx789"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="password"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="******"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-400 block w-full p-2.5"
+                          required
+                        />
+                      </div>
+                      <div className="text-right text-sm text-red-500">
+                        <a href="">Forget Password?</a>
+                      </div>
+                      <div className="flex justify-center">
+                        <button
+                          type="submit"
+                          className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                        >
+                          Login to your account
+                        </button>
+                      </div>
+                      <div className="text-left text-sm">
+                        <h2 className="text-gray-800">
+                          Not registered?{" "}
+                          <a className="text-blue-700" href="">
+                            Create account
+                          </a>
+                        </h2>
+                      </div>
+                    </form>
+                  </div>
+                </Login>
+              )}
             </div>
             <div className="dropdown dropdown-end">
               <div
@@ -174,55 +180,61 @@ const Navbar = () => {
                   <div className="mt-2 text-lg">CR</div>
                 </div>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-lg dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-              >
-                <li>
-                  <a className="justify-between">Profile</a>
-                </li>
-                <li>
-                  <a>Address</a>
-                </li>
-                <li>
-                  <a>Notifications</a>
-                </li>
-                <li>
-                  <a>Payment Methods</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
-              </ul>
+              {isClient && (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-lg dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <a className="justify-between">Profile</a>
+                  </li>
+                  <li>
+                    <a>Address</a>
+                  </li>
+                  <li>
+                    <a>Notifications</a>
+                  </li>
+                  <li>
+                    <a>Payment Methods</a>
+                  </li>
+                  <li>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
       </div>
-      <div
-        className={`fixed right-0 top-0 w-full lg:w-[25vw] bg-blue-100 h-full p-4 ${
-          activeCart ? "translate-x-0" : "translate-x-full"
-        } transition-all duration-500 z-50`}
-      >
-        <div className="flex justify-between items-center my-3 ">
-          <span className="text-xl font-bold font-sans text-gray-800 ">
-            Order Summary
-          </span>
-          <IoMdClose
-            onClick={() => setActiveCart(!activeCart)}
-            className="border-2 border-blue-600 text-gray-600 font-bold p-1 text-2xl rounded-md hover:text-orange-500 hover:border-orange-500 cursor-pointer"
-          />
+      {isClient && (
+        <div
+          className={`fixed right-0 top-0 w-full lg:w-[25vw] bg-blue-100 h-full p-4 ${
+            activeCart ? "translate-x-0" : "translate-x-full"
+          } transition-all duration-500 z-50`}
+        >
+          <div className="flex justify-between items-center my-3 ">
+            <span className="text-xl font-bold font-sans text-gray-800 ">
+              Order Summary
+            </span>
+            <IoMdClose
+              onClick={() => setActiveCart(!activeCart)}
+              className="border-2 border-blue-600 text-gray-600 font-bold p-1 text-2xl rounded-md hover:text-orange-500 hover:border-orange-500 cursor-pointer"
+            />
+          </div>
+          <Ordercard />
+          <Ordercard />
+          <Ordercard />
+          <div className="shadow-xl">
+            <button className="bg-red-600 text-white p-3 rounded-md shadow-md absolute bottom-3 right-0 mr-5 hover:bg-red-700">
+              Proceed to Checkout
+            </button>
+            <span className="flex flex-grid absolute bottom-6 left-0 ml-8 text-blue-950">
+              <p className="font-bold">Total:</p>
+              <p className="ml-2 ">₹388</p>
+            </span>
+          </div>
         </div>
-        <Ordercard />
-        <div className="shadow-xl">
-          <button className="bg-red-600 text-white p-3 rounded-md shadow-md absolute bottom-3 right-0 mr-5 hover:bg-red-700">
-            Proceed to Checkout
-          </button>
-          <span className="flex flex-grid absolute bottom-6 left-0 ml-8 text-blue-950">
-            <p className="font-bold">Total:</p>
-            <p className="ml-2 ">₹388</p>
-          </span>
-        </div>
-      </div>
+      )}
     </>
   );
 };
