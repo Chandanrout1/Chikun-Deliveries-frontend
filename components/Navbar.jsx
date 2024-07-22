@@ -6,11 +6,14 @@ import logo from "../public/favicon.png";
 import Login from "./Login.jsx";
 import { IoMdClose } from "react-icons/io";
 import Ordercard from "./Ordercard";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
   const [isClient, setIsClient] = useState(false);
+
+  const cartItems = useSelector((state)=> state.cart.cart);
 
   useEffect(() => {
     setIsClient(true);
@@ -221,9 +224,20 @@ const Navbar = () => {
               className="border-2 border-blue-600 text-gray-600 font-bold p-1 text-2xl rounded-md hover:text-orange-500 hover:border-orange-500 cursor-pointer"
             />
           </div>
-          <Ordercard />
-          <Ordercard />
-          <Ordercard />
+          {
+            cartItems.length > 0 ? 
+            cartItems.map((item)=> {
+              return <Ordercard key={item.id} 
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              img={item.img}
+              gram={item.gram}
+              qty={item.qty}
+              />
+            }): <h2 className="text-center text-xl font-bold text-blue-950">Your Cart is Empty</h2>
+          }
+          
           <div className="shadow-xl">
             <button className="bg-red-600 text-white p-3 rounded-md shadow-md absolute bottom-3 right-0 mr-5 hover:bg-red-700">
               Proceed to Checkout

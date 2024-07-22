@@ -1,6 +1,10 @@
+"use client"
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/app/redux/slice';
 
 const PaneerCard = ({ id, name, img, price, gram, pieces, serves}) => {
+    const dispatch = useDispatch();
   return (
     <div className='font-bold w-[350px] bg-slate-200 p-3 flex flex-col gap-2 rounded-lg'>
         <img className='rounded-lg hover:scale-105 cursor-grab transition-all duration-300 ease-in-out' src={img} alt="img" />
@@ -13,7 +17,11 @@ const PaneerCard = ({ id, name, img, price, gram, pieces, serves}) => {
             </span>
             <span className='flex flex-row justify-between items-center'>
                 <p className=''>₹{price}</p>
-                <button className='bg-blue-500 rounded-md p-1 text-white w-20 hover:bg-blue-700 hover:scale-105'>Add +</button>
+                <button 
+                    onClick={()=>dispatch(addToCart({
+                        id,name,price,gram,img,qty:1
+                    }))}
+                className='bg-blue-500 rounded-md p-1 text-white w-20 hover:bg-blue-700 hover:scale-105'>Add</button>
             </span>
         </div>
     </div>
