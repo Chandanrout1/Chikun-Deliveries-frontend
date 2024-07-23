@@ -15,6 +15,8 @@ const Navbar = () => {
 
   const cartItems = useSelector((state)=> state.cart.cart);
 
+  const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.price,0);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -244,7 +246,7 @@ const Navbar = () => {
             </button>
             <span className="flex flex-grid absolute bottom-6 left-0 ml-8 text-blue-950">
               <p className="font-bold">Total:</p>
-              <p className="ml-2 ">₹388</p>
+              <p className="ml-2 font-bold">₹{totalPrice}</p>
             </span>
           </div>
         </div>
