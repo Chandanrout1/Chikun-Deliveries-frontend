@@ -165,7 +165,7 @@ const Navbar = () => {
                       <div className="text-left text-sm">
                         <h2 className="text-gray-800">
                           Not registered?{" "}
-                          <a className="text-blue-700" href="">
+                          <a className="text-blue-700" href="/signup">
                             Create account
                           </a>
                         </h2>
